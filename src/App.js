@@ -3,7 +3,13 @@ import './App.css';
 import Nav from './views/Nav.js';
 import { useState, useEffect } from 'react';
 import Todo from './views/Todo.js';
-
+import Blog from './views/Blog.js';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Link,
+  Route
+} from 'react-router-dom'
 
 function App() {
   // let name = "Vu"
@@ -14,10 +20,10 @@ function App() {
     { id: '2', title: 'todo2', type: 't2' }
   ])
 
-  // chay khi giao dien re - rendering
-  useEffect(() => {
-    console.log('useEffect')
-  }, [address]);
+  // // chay khi giao dien re - rendering
+  // useEffect(() => {
+  //   console.log('useEffect')
+  // }, [address]);
 
   const onClickHandler = (event) => {
     if (!address) {
@@ -42,29 +48,53 @@ function App() {
 
   return (
 
-    <div className="App">
+    <Router>
 
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1> Helo {name}</h1>
+      <div className="App">
 
-        <Todo
-          todos={todos}
-          title='All todo list'
-          deleteDataTodo={deleteDataTodo}
-        />
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
 
-        <Todo
-          todos={todos.filter(item => item.type === 't2')}
-          title="t2's todo list"
-          deleteDataTodo={deleteDataTodo}
-        />
 
-        <input type='text' value={address} onChange={(event) => onChangeHandler(event)} />
-        <button type='button' onClick={(event) => onClickHandler(event)}>  Click !!!</button>
-      </header >
-    </div >
+        </header >
+
+        <Routes>
+          <Route exact path="/" element={
+            <h1> Helo {name}</h1>
+
+          }>
+
+          </Route>
+          <Route path="/todo" element={
+            <>
+              <Todo
+                todos={todos}
+                title='All todo list'
+                deleteDataTodo={deleteDataTodo}
+
+              />
+              <input type='text' value={address} onChange={(event) => onChangeHandler(event)} />
+              <button type='button' onClick={(event) => onClickHandler(event)}>  Click !!!</button>
+            </>
+
+          }>
+          </Route>
+
+          <Route path="/blog" element={
+
+            // <h1>CCS</h1>
+            <Blog />
+
+
+
+          }>
+          </Route>
+
+        </Routes>
+      </div >
+
+    </Router>
 
   );
 }

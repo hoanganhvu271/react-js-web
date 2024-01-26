@@ -7,7 +7,7 @@ const Todo = (props) => {
     }
     return (
 
-        <div className='todo-container' >
+        <div className='todo-container' style={{ backgroundColor: '#282c34', color: 'white' }}>
             <div className="title">
                 {props.title}
             </div>
