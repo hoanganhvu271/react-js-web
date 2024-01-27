@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Todo from './views/Todo.js';
 import Blog from './views/Blog.js';
 import AddNewBlog from './views/AddNewBlog.js';
+import YoutubeSearch from './views/YoutubeSearch.js';
 import {
   BrowserRouter as Router,
   Routes,
@@ -100,6 +101,12 @@ function App() {
           <Route path="/add-new-blog" element={
 
             <AddNewBlog />
+          }>
+          </Route>
+
+          <Route path="/about" element={
+
+            <YoutubeSearch />
           }>
           </Route>
 
