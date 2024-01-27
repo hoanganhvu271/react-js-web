@@ -4,6 +4,7 @@ import Nav from './views/Nav.js';
 import { useState, useEffect } from 'react';
 import Todo from './views/Todo.js';
 import Blog from './views/Blog.js';
+import AddNewBlog from './views/AddNewBlog.js';
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,6 +12,7 @@ import {
   Route
 } from 'react-router-dom'
 
+import DetailBlog from './views/DetailBlog.js';
 function App() {
   // let name = "Vu"
   const [name, setName] = useState('Vu')
@@ -85,9 +87,19 @@ function App() {
 
             // <h1>CCS</h1>
             <Blog />
+          }>
+          </Route>
 
 
+          <Route path="/blog/:id" element={
 
+            <DetailBlog />
+          }>
+          </Route>
+
+          <Route path="/add-new-blog" element={
+
+            <AddNewBlog />
           }>
           </Route>
 

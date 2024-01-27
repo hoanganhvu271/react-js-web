@@ -1,5 +1,7 @@
 import useFetch from '../customize/fetch';
 import './Blog.scss'
+import { Link, useNavigate } from 'react-router-dom'
+
 const Blog = () => {
 
     const { data: dataBlog, isLoading, isError }
@@ -9,30 +11,46 @@ const Blog = () => {
     let newData = []
     if (dataBlog && dataBlog.length > 0) {
         newData = dataBlog.slice(0, 9)
-        console.log('newData:', newData);
+        // console.log('newData:', newData);
     }
+
+    let navigate = useNavigate();
+
+    const handleAddNew = () => {
+        navigate('/add-new-blog')
+    }
+
     return (
         <>
+            <div> <button className='add-new-btn' onClick={handleAddNew}> + Add new Blog</button></div>
 
             <div className='blog-container'>
                 {/* < h1 > Hello Blog</ h1> */}
-                {newData && newData.length > 0 && newData.map(item => {
+                {isLoading === false && newData && newData.length > 0 && newData.map(item => {
                     return (
-                        <div className='single-blog'>
-                            <div className='title'>
-                                {item.title}
-                            </div>
+                        <div className='single-blog' key={item.id}>
+                            <div className='title'> {item.title} </div>
 
-                            <div className='content'>
-                                {item.body}
-                            </div>
+                            <div className='content'> {item.body} </div>
 
-                            <button>View detail</button>
+
+
+                            <button>
+                                <Link to={`/blog/${item.id}`}>
+                                    View detail
+                                </Link>
+
+                            </button>
 
                         </div>
                     )
                 })}
-            </div>
+
+                {isLoading &&
+                    <div style={{ textAlign: 'center !important', width: '100%' }}> Loading data.... </div>
+                }
+
+            </div >
 
         </>
 
